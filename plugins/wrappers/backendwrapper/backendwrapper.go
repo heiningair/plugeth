@@ -25,6 +25,7 @@ import (
 
 type Backend struct {
 	b               ethapi.Backend
+	bc              core.BlockChain
 	newTxsFeed      event.Feed
 	newTxsOnce      sync.Once
 	chainFeed       event.Feed
@@ -42,8 +43,8 @@ type Backend struct {
 	chainConfig     *params.ChainConfig
 }
 
-func NewBackend(b ethapi.Backend) *Backend {
-	return &Backend{b: b}
+func NewBackend(b ethapi.Backend, bc core.BlockChain) *Backend {
+	return &Backend{b: b, bc: bc}
 }
 
 func (b *Backend) SuggestGasTipCap(ctx context.Context) (*big.Int, error) {
@@ -458,4 +459,8 @@ func (b *Backend) ChainConfig() *params.ChainConfig {
 		}
 	}
 	return b.chainConfig
+}
+
+func (b *Backend) Blockchain() *core.BlockChain {
+	return &b.bc
 }

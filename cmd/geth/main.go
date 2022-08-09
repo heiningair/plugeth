@@ -354,8 +354,9 @@ func geth(ctx *cli.Context) error {
 			return fmt.Errorf("invalid command: %q", args[0])
 		}
 	}
-	stack, backend := makeFullNode(ctx)
-	wrapperBackend := backendwrapper.NewBackend(backend)
+	stack, backend, blockchain := makeFullNode(ctx)
+	wrapperBlockchain := backendwrapper.NewBlockchain(blockchain)
+	wrapperBackend := backendwrapper.NewBackend(backend, wrapperBlockchain)
 	pluginsInitializeNode(stack, wrapperBackend)
 	if ok, err := plugins.RunSubcommand(ctx); ok {
 		stack.Close()
