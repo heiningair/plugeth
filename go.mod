@@ -2,8 +2,6 @@ module github.com/ethereum/go-ethereum
 
 go 1.17
 
-replace github.com/openrelayxyz/plugeth-utils => github.com/heiningair/plugeth-utils v0.0.0-20220809120434-431b45e5e1f8
-
 require (
 	github.com/Azure/azure-sdk-for-go/sdk/storage/azblob v0.3.0
 	github.com/StackExchange/wmi v0.0.0-20180116203802-5d049714c4a6 // indirect
